@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 	ProjectSection(SolutionItems) = preProject
 		db.sql = db.sql
 		docker-compose.yaml = docker-compose.yaml
-		..\..\..\Downloads\dump-postgres-202411141442.sql = ..\..\..\Downloads\dump-postgres-202411141442.sql
+		dump-postgres-202411141535.sql = dump-postgres-202411141535.sql
 	EndProjectSection
 EndProject
 Global

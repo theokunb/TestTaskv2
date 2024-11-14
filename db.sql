@@ -10,9 +10,11 @@ CREATE TABLE public.purchasedata (
 	id serial NOT NULL,
 	purchasenumber varchar NULL,
 	purchaseobjectinfo varchar NULL,
+	price float4 NULL,
 	docpublishdate date NULL,
 	CONSTRAINT purchasedata_pk PRIMARY KEY (id)
 );
+
 
 CREATE TABLE public.customerpurchase (
 	id serial NOT NULL,
