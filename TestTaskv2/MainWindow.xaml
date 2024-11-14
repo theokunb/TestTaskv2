@@ -1,0 +1,40 @@
+﻿<Window x:Class="TestTaskv2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskv2"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:TestTaskv2.ViewModel"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
+                        IsDesignTimeCreatable=False}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="по ссылке"/>
+            <TextBox Text="{Binding Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="execute"
+                    Command="{Binding CommandHrefExecute}"
+                    CommandParameter="{Binding Link}"
+                    IsEnabled="{Binding LinkFiled}">
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="по xml"/>
+            <Button Content="attach"
+                    Command="{Binding CommandAttach}"/>
+            <Button Content="execute"
+                    IsEnabled="{Binding FileAttached}"
+                    Command="{Binding CommandXmlExecute}"/>
+        </StackPanel>
+        <TextBlock Grid.Row="2"
+                   Text="{Binding StatusText}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,11 @@
+﻿<Application x:Class="TestTaskv2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TestTaskv2"
+             xmlns:vm="clr-namespace:TestTaskv2.ViewModel">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type TypeName=vm:MainViewModel}">
+            <local:MainWindow/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
