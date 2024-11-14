@@ -5,6 +5,13 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskv2", "TestTaskv2\TestTaskv2.csproj", "{D37E55EE-5CA3-4A48-B377-1F096376D36C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{36C940B8-BE74-4119-85D7-49938BE262AD}"
+	ProjectSection(SolutionItems) = preProject
+		db.sql = db.sql
+		docker-compose.yaml = docker-compose.yaml
+		..\..\..\Downloads\dump-postgres-202411141442.sql = ..\..\..\Downloads\dump-postgres-202411141442.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

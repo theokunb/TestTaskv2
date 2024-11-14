@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using TestTaskv2.Entity;
 using TestTaskv2.Repository;
 using TestTaskv2.Services;
 using TestTaskv2.ViewModel;
