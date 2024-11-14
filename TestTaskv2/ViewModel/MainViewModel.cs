@@ -26,8 +26,6 @@ namespace TestTaskv2.ViewModel
             CommandAttach = new RelayCommand(param => OnAttach(param));
 
             FileAttached = false;
-
-            Link = "https://tenmon.ru/1/0123200000319002908";
         }
 
         private string _link = "";
@@ -108,7 +106,7 @@ namespace TestTaskv2.ViewModel
 
         private async void InsertDataToDb(PurchaseData data)
         {
-            if(data == null)
+            if (data == null)
             {
                 return;
             }

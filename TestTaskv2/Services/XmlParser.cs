@@ -41,7 +41,7 @@ namespace TestTaskv2.Services
                         data.Customers = data.ParseCustomers(child).ToList();
                         break;
                     case "maxPrice":
-                        data.Price = float.Parse(child.InnerText.Replace(".",","));
+                        data.Price = float.Parse(child.InnerText.Replace(".", ","));
                         break;
                     case "lot":
                         data.Parse(child);

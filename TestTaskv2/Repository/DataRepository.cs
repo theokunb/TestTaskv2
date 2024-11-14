@@ -32,7 +32,7 @@ namespace TestTaskv2.Repository
                         }
                         data.Id = await CreatePurchaseData(connection, transaction, data);
 
-                        foreach(var customer in data.Customers)
+                        foreach (var customer in data.Customers)
                         {
                             var customerPurchase = new CustomerPurchase
                             {

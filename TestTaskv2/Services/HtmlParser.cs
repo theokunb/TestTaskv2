@@ -1,12 +1,12 @@
 ﻿using HtmlAgilityPack;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System;
-using TestTaskv2.Entity;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Web;
+using TestTaskv2.Entity;
 
 namespace TestTaskv2.Services
 {
@@ -30,7 +30,7 @@ namespace TestTaskv2.Services
             purchaseData.Customers = new List<Customer>();
             foreach (var customerNode in customersElement.ChildNodes)
             {
-                if(customerNode.Name == "#comment")
+                if (customerNode.Name == "#comment")
                 {
                     continue;
                 }
@@ -65,7 +65,7 @@ namespace TestTaskv2.Services
             return float.Parse(s);
         }
 
-            private T GetValueFromElement<T>(HtmlNode node, string xPath, Func<string, T> convertAction = null)
+        private T GetValueFromElement<T>(HtmlNode node, string xPath, Func<string, T> convertAction = null)
         {
             var element = node.SelectSingleNode(xPath);
 
@@ -80,9 +80,9 @@ namespace TestTaskv2.Services
     {
         public static bool HasAttributeValue(this HtmlNode node, string value)
         {
-            foreach(var attribute in node.Attributes)
+            foreach (var attribute in node.Attributes)
             {
-                if(attribute.Value == value)
+                if (attribute.Value == value)
                 {
                     return true;
                 }
@@ -101,9 +101,9 @@ namespace TestTaskv2.Services
                 customer.Parse(node.FirstChild);
                 return;
             }
-            if(node.HasAttributeValue("card-value customers__search-column"))
+            if (node.HasAttributeValue("card-value customers__search-column"))
             {
-                foreach(var childNode in node.ChildNodes)
+                foreach (var childNode in node.ChildNodes)
                 {
                     customer.Parse(childNode);
                 }
@@ -128,6 +128,6 @@ namespace TestTaskv2.Services
                     customer.Inn = match.Value;
                 }
             }
-        } 
+        }
     }
 }
