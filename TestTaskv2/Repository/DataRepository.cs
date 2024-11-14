@@ -63,8 +63,8 @@ namespace TestTaskv2.Repository
 
         private async Task<int> CreatePurchaseData(IDbConnection connection, IDbTransaction transaction, PurchaseData data)
         {
-            var query = "insert into PurchaseData (PurchaseNumber, PurchaseObjectInfo, DocPublishDate)" +
-                            "values (@PurchaseNumber, @PurchaseObjectInfo, @DocPublishDate) returning id";
+            var query = "insert into PurchaseData (PurchaseNumber, PurchaseObjectInfo, DocPublishDate, Price)" +
+                            "values (@PurchaseNumber, @PurchaseObjectInfo, @DocPublishDate, @Price) returning id";
             return await connection.QueryFirstAsync<int>(query, data, transaction);
         }
 

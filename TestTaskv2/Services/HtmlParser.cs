@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 using System;
 using TestTaskv2.Entity;
 using System.Linq;
+using System.Web;
+using System.Text;
+using System.Threading;
 
 namespace TestTaskv2.Services
 {
@@ -13,17 +16,17 @@ namespace TestTaskv2.Services
         {
             var purchaseData = new PurchaseData();
 
-            var purchaseObjectInfoElement = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='main-lot-title']");
-            purchaseData.PurchaseObjectInfo = purchaseObjectInfoElement.InnerText;
+            purchaseData.PurchaseObjectInfo = GetValueFromElement<string>(htmlDoc.DocumentNode, "//span[@class='main-lot-title']");
+            purchaseData.DocPublishDate = GetValueFromElement(htmlDoc.DocumentNode, "//div[@class='date']", (text) => DateTime.Parse(text));
+            purchaseData.PurchaseNumber = GetValueFromElement(htmlDoc.DocumentNode, "//div[@class='lot-card__link']", (text) => new string(text.Skip(2).ToArray()));
 
-            var publishDateElement = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='date']");
-            purchaseData.DocPublishDate = DateTime.Parse(publishDateElement.InnerText);
-
-            var purchaseNumberElement = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='lot-card__link']");
-            purchaseData.PurchaseNumber = new string(purchaseNumberElement.FirstChild.InnerText.Skip(2).ToArray());
+            purchaseData.Price = GetValueFromElement(htmlDoc.DocumentNode, "//span[@class='lot-card__main-cost-value']", text =>
+                {
+                    var priceDecoded = HttpUtility.HtmlDecode(text);
+                    return ConvertCurrency(priceDecoded);
+                });
 
             var customersElement = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='customers__content']");
-
             purchaseData.Customers = new List<Customer>();
             foreach (var customerNode in customersElement.ChildNodes)
             {
@@ -42,6 +45,34 @@ namespace TestTaskv2.Services
             }
 
             return purchaseData;
+        }
+
+        public float ConvertCurrency(string value)
+        {
+            char currentDecimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            value = value.Replace('.', currentDecimalSeparator);
+            value = value.Replace(',', currentDecimalSeparator);
+
+            StringBuilder builder = new StringBuilder(value.Length);
+            foreach (var ch in value)
+            {
+                if (char.IsDigit(ch) || ch == currentDecimalSeparator)
+                    builder.Append(ch);
+            }
+
+            string s = builder.ToString();
+            return float.Parse(s);
+        }
+
+            private T GetValueFromElement<T>(HtmlNode node, string xPath, Func<string, T> convertAction = null)
+        {
+            var element = node.SelectSingleNode(xPath);
+
+            if (convertAction != null)
+                return convertAction(element.InnerText);
+
+            return (T)Convert.ChangeType(element.InnerText, typeof(T));
         }
     }
 
