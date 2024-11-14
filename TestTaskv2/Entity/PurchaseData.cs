@@ -7,6 +7,7 @@ namespace TestTaskv2.Entity
     {
         public string PurchaseNumber { get; set; }
         public string PurchaseObjectInfo { get; set; }
+        public float Price { get; set; }
         public DateTime DocPublishDate { get; set; }
         public IList<Customer> Customers { get; set; }
     }
