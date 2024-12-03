@@ -6,5 +6,3 @@
 - Dapper
 - HtmlAgilityPack
 - Selenium
-
-  
